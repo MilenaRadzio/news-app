@@ -1,0 +1,5 @@
+main {
+  main-height: calc(100vh - 100px - 80px);
+  /* margin-top: 80px;
+  margin-bottom: 100px; */
+}

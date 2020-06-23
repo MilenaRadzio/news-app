@@ -1,0 +1,8 @@
+.Cats {
+  padding: 16px;
+}
+
+.Cats label {
+  width: 100px;
+  display: inline-block;
+}
