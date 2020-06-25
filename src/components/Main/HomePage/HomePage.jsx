@@ -1,12 +1,15 @@
 import './HomePage.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsList from "./NewsList/NewsList";
 import NewsFiltersBar from "./NewsFiltersBar/NewsFiltersBar";
 import LanguageContext from '../../../LanguageContext';
+import { Pagination } from 'semantic-ui-react'
+
+
 
 class HomePage extends React.Component {
 
-  static conextType = LanguageContext;
+static conextType = LanguageContext;
 
   constructor(props) {
     super(props);
@@ -50,26 +53,25 @@ getQuery () {
 
 getArticles() {
   const {category, lang, phrase, page} = this.state;
-  const query = category ? `&category=${category}` : '';
+  const query = category ? `&category=${category}` : "";
   const queryWithPhrase = phrase ? `${query}&q=${phrase}` : query;
-  const queryWithPage = page
-    ? `${queryWithPhrase}&page=${page}`
+  const queryWithPage = page ? `${queryWithPhrase}&page=${page}`
     : queryWithPhrase;
 
-  fetch(`http://localhost:4000/articles${lang}${queryWithPhrase}`)
+  fetch(`http://localhost:4000/articles?country=${lang}${queryWithPhrase}`)
     .then((response) => response.json())
     .then((results) => this.setState({results}));
 }
 
 setCategory = (category) => this.setState({ category });
-setSerchPhrase = (e) => {
+setSearchPhrase = (e) => {
   const phrase = e.target.value;
   if (phrase.length >=3) this.setState({phrase});
   if (!phrase || phrase ==='') this.setState({phrase: null});
 };
 onPageChange = (e, {activePage}) => {
   this.setState({activePage});
-}
+};
   render() {
     const { results } = this.state;
     if (!results) return null;
@@ -79,17 +81,17 @@ onPageChange = (e, {activePage}) => {
       <div id="HomePage">
         <NewsFiltersBar
         onCategoryChange={this.setCategory}
-        onSearchQueryChange={this.setSearchQuery}
+        onSearchPhraseChange={this.setSearchPhrase}
         category={this.state.category}
         />
         <NewsList articles={results.articles} />
         </div>
       );
-       <div id="pagination">
+       <div id="Pagination">
         {results && results.totalResults ? (
-          <pagination
+          <Pagination
           defaultActivePage={1}
-          totalPage={Math.ceil(results.totalResults / 20)}
+          totalPages={Math.ceil(results.totalResults / 5)}
           onPageChange={this.onPageChange}
           />
         ) : null}
@@ -98,5 +100,7 @@ onPageChange = (e, {activePage}) => {
 );
 }
 }
+
+
 
 export default HomePage;

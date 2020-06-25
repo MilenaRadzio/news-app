@@ -4,14 +4,17 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import LanguageContext from '../../LanguageContext';
 
+
 import "react-datepicker/dist/react-datepicker.css";
 import NewsList from "./HomePage/NewsList/NewsList";
+
 
 const sortByOptions = [
   {value: 'publishedAt', name: 'Publish date'},
   {value: 'relevancy', name: 'Relevancy'},
   {value: 'popularity', name: 'Popularity'},
 ]
+
 
 const Cats = () => {
   const [startDate, setStartDate] = useState(moment().subtract(1, 'months').toDate());
@@ -20,19 +23,17 @@ const Cats = () => {
   const [results, setResults] = useState(null);
   const lang = useContext(LanguageContext);
 
+
   const fetchArticles = useCallback(() => {
     if (startDate > endDate) return alert('start date is greater than end date');
 
     fetch(`http://localhost:4000/Cats?language=${lang}&from=${startDate.toISOString()}&to=${endDate.toISOString()}&sortBy=${sortBy}`)
       .then((response) => response.json())
-      .then((res) => {
-      setResults(res);
-    });
-  }, [startDate, endDate, lang, sortBy]);
+      .then((res) => setResults(res));
+    }, [startDate, endDate, lang, sortBy]);
 
 useEffect(() => {fetchArticles(); }, [fetchArticles]);
 useEffect(() => {fetchArticles(); }, [startDate, endDate]);
-
 
 
 return (
@@ -53,8 +54,9 @@ return (
     ))}
   </select>
   </div>
-  {results ? (<NewsList key={`${startDate}&{endDate}`}articles={results.articles.sort((a,b) => a.publishedAt > b.publishedAt)} />) : null}
-  </div>
+
+  {results ? (<NewsList key={`${startDate}&{endDate}`} articles={results.articles.sort((a,b) => a.publishedAt > b.publishedAt)} />) : null};
+</div>
 );
 };
 

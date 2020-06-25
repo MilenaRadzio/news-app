@@ -25,7 +25,7 @@
 // export default Header;
 
 import './Header.css';
-import React, {Component}from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Input, Menu, Segment} from "semantic-ui-react";
 import LanguageDropdown from './LanguageDropdown';
