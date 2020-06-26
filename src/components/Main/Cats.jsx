@@ -55,9 +55,9 @@ return (
   </select>
   </div>
 
-  {results ? (<NewsList key={`${startDate}&{endDate}`} articles={results.articles.sort((a,b) => a.publishedAt > b.publishedAt)} />) : null};
+  {results ? (<NewsList key={`${startDate}&{endDate}`} articles={results.articles.sort((a,b) => a.publishedAt > b.publishedAt)} />) : null}
 </div>
-);
-};
+)
+}
 
 export default Cats;

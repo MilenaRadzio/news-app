@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import NewsList from "./NewsList/NewsList";
 import NewsFiltersBar from "./NewsFiltersBar/NewsFiltersBar";
 import LanguageContext from '../../../LanguageContext';
-import { Pagination } from 'semantic-ui-react'
+import { Pagination } from 'semantic-ui-react';
 
 
 
@@ -58,7 +58,7 @@ getArticles() {
   const queryWithPage = page ? `${queryWithPhrase}&page=${page}`
     : queryWithPhrase;
 
-  fetch(`http://localhost:4000/articles?country=${lang}${queryWithPhrase}`)
+  fetch(`http://localhost:4000/articles?country=${lang}${queryWithPage}`)
     .then((response) => response.json())
     .then((results) => this.setState({results}));
 }
@@ -67,10 +67,10 @@ setCategory = (category) => this.setState({ category });
 setSearchPhrase = (e) => {
   const phrase = e.target.value;
   if (phrase.length >=3) this.setState({phrase});
-  if (!phrase || phrase ==='') this.setState({phrase: null});
+  if (!phrase || phrase ==="") this.setState({phrase: null});
 };
 onPageChange = (e, {activePage}) => {
-  this.setState({activePage});
+  this.setState({page: activePage});
 };
   render() {
     const { results } = this.state;
@@ -84,9 +84,10 @@ onPageChange = (e, {activePage}) => {
         onSearchPhraseChange={this.setSearchPhrase}
         category={this.state.category}
         />
+
         <NewsList articles={results.articles} />
         </div>
-      );
+
        <div id="Pagination">
         {results && results.totalResults ? (
           <Pagination

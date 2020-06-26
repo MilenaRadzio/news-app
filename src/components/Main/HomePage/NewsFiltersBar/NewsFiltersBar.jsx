@@ -1,22 +1,18 @@
 import React from 'react';
-import CategoryDropdown from "./CategoryDropdown";
+import PropTypes from 'prop-types';
+import { Input } from 'semantic-ui-react';
+import CategoryDropdown from './CategoryDropdown';
 
-const NewsFiltersBar = (props) => (
-  <div id="NewsFiltersBar">
-    <div className='search'>
-      <label>Search: </label>
-      <input
-        className='input'
-        placeholder='what are you looking for'
-        onCange={e => props.onSearchQueryChange(e.target.value)}
-      ></input>
+const NewsFiltersBar = (props) =>(
+    <div id='NewsFiltersBar'>
+        <CategoryDropdown onCategoryChange={props.onCategoryChange}/>
+        <Input placeholder='Search...' id='search-phrase' onChange={props.onSearchPhraseChange} />
     </div>
-    <CategoryDropdown
-    onCategoryChange={props.onCategoryChange}
-    category={props.category}
-    />
-  </div>
 );
 
+NewsFiltersBar.propTypes = {
+    onCategoryChange: PropTypes.func.isRequired,
+    onSearchPhraseChange: PropTypes.func.isRequired,
+}
 
 export default NewsFiltersBar;
