@@ -27,7 +27,7 @@
 import './Header.css';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Input, Menu, Segment} from "semantic-ui-react";
+import {Menu, Segment} from "semantic-ui-react";
 import LanguageDropdown from './LanguageDropdown';
 
 export default class Header extends Component {
@@ -63,14 +63,7 @@ export default class Header extends Component {
          onClick={this.handleItemClick}
        />
 
-       <Menu.Item
-       as={Link}
-       to="/help"
-       name= "help"
-       onClick={this.handleItemClick}
-       />
-
-       <Menu.Menu position="right">
+        <Menu.Menu position="right">
         <Menu.Item>
           <LanguageDropdown
             onLanguageChange={this.props.onLanguageChange}

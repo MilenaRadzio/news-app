@@ -13,7 +13,7 @@ const NewsList = (props) =>
         url={item.url}
         sourceName={item.source.name}
       />
-    )};
+    )}
   </div>
 
 export default NewsList;

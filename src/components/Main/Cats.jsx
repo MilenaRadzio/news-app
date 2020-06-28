@@ -19,7 +19,7 @@ const sortByOptions = [
 const Cats = () => {
   const [startDate, setStartDate] = useState(moment().subtract(1, 'months').toDate());
   const [endDate, setEndDate] = useState(moment().toDate());
-  const [sortBy, setSortBy] = useState(sortByOptions[0].value);
+  const [sortBy] = useState(sortByOptions[0].value);
   const [results, setResults] = useState(null);
   const lang = useContext(LanguageContext);
 
@@ -33,7 +33,7 @@ const Cats = () => {
     }, [startDate, endDate, lang, sortBy]);
 
 useEffect(() => {fetchArticles(); }, [fetchArticles]);
-useEffect(() => {fetchArticles(); }, [startDate, endDate]);
+// useEffect(() => {fetchArticles(); }, [startDate, endDate]);
 
 
 return (

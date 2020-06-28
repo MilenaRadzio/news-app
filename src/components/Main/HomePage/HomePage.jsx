@@ -1,5 +1,5 @@
 import './HomePage.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import NewsList from "./NewsList/NewsList";
 import NewsFiltersBar from "./NewsFiltersBar/NewsFiltersBar";
 import LanguageContext from '../../../LanguageContext';
